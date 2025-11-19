@@ -7,7 +7,10 @@ var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
+
+var port = Environment.GetEnvironmentVariable("PORT") ?? "7076";
+app.Urls.Add($"http://*:{port}");
 
 // CREATE
 app.MapPost("/products", (int id, string name, decimal price) =>
