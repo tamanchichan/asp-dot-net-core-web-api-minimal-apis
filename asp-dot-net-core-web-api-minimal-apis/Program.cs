@@ -30,7 +30,7 @@ app.MapPost("/products", (int id, string name, decimal price) =>
 });
 
 // READ
-app.MapGet("/products", (int? id) =>
+app.MapGet("/products/{id?}", (int? id) =>
 {
 
     try
