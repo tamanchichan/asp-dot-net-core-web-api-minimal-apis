@@ -12,6 +12,10 @@ var app = builder.Build();
 var port = Environment.GetEnvironmentVariable("PORT") ?? "7076";
 app.Urls.Add($"http://*:{port}");
 
+// wwwroot folder for static files
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
 // CREATE
 app.MapPost("/products", (int id, string name, decimal price) =>
 {
@@ -36,7 +40,6 @@ app.MapPost("/products", (int id, string name, decimal price) =>
 // READ
 app.MapGet("/products/{id?}", (int? id) =>
 {
-
     try
     {
         HashSet<Product> products = Database.Products;
