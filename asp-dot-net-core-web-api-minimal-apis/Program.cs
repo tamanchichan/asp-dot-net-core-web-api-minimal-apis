@@ -15,6 +15,10 @@ app.Urls.Add($"http://*:{port}");
 // CREATE
 app.MapPost("/products", (int id, string name, decimal price) =>
 {
+    if (Database.Products.Any(p => p.Id == id))
+    {
+        return Results.Conflict($"Product with ID '{id}' already exists.");
+    }
     try
     {
         Product product = new Product(id, name, price);
