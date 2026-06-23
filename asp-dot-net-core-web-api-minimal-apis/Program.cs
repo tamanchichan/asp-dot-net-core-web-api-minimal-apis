@@ -3,14 +3,27 @@ using asp_dot_net_core_web_api_minimal_apis.Model;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var port = Environment.GetEnvironmentVariable("PORT") ?? "7076";
+builder.WebHost.UseUrls($"http://*:{port}");
+
+// CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
 // Add services to the container.
 var app = builder.Build();
 
+app.UseCors("AllowAll");
+
 // Configure the HTTP request pipeline.
 //app.UseHttpsRedirection();
-
-var port = Environment.GetEnvironmentVariable("PORT") ?? "7076";
-app.Urls.Add($"http://*:{port}");
 
 // wwwroot folder for static files
 app.UseDefaultFiles();
