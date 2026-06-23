@@ -17,13 +17,29 @@
         <title>ASP.NET Core Web API - Minimal APIs</title>
     </head>
     <body>
+        <script>
+            async function loadProducts() {
+                const response = await fetch("https://asp-dot-net-core-web-api-minimal-apis.onrender.com/products");
+                const products = await response.json();
+
+                const listContainer = document.getElementById("productList");
+
+                products.forEach(product => {
+                    const listItem = document.createElement("li");
+                    listItem.textContent = `${product.name} - $${product.price}`;
+                    listContainer.appendChild(listItem);
+                });
+            }
+
+            loadProducts();
+        </script>
         <header>
             <div class="container heading">
                 <h1>Taman Chi Chan</h1>
                 <nav>
                     <ul>
-                        <li>Home</li>
-                        <li>About</li>
+                        <li><a href="https://tamanchichan.github.io/portfolio/" target="_parent">Porfolio</a></li>
+                        <li>Projects</li>
                         <li>Contact</li>
                     </ul>
                 </nav>
@@ -32,6 +48,9 @@
         <main>
             <div class="container">
                 <h2>Minimal APIs using Render Platform</h2>
+                <div id="productList">
+
+                </div>
             </div>
         </main>
         <footer><div class="container"></div></footer>
