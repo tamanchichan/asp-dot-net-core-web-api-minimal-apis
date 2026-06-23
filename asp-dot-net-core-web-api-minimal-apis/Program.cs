@@ -70,7 +70,7 @@ app.MapGet("/products/{id?}", (int? id) =>
 });
 
 // UPDATE
-app.MapPut("/products/edit/{id}", (int? id, string? name, decimal? price) =>
+app.MapPut("/products/{id}", (int id, string? name, decimal? price) =>
 {
     try
     {
